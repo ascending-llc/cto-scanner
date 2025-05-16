@@ -3,8 +3,8 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-import { ProwlerShort } from "@/components/icons";
-import { ProwlerExtended } from "@/components/icons";
+import { CTOIconShort } from "@/components/icons";
+import { CTOIconExtended } from "@/components/icons";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@/lib/utils";
@@ -42,18 +42,20 @@ export function Sidebar() {
           <Link
             href="/"
             className={clsx(
-              "mb-6 flex w-full flex-col items-center justify-center px-3",
+              "mb-6 flex w-full flex-col items-center justify-center",
               {
                 "gap-0": !isOpen,
               },
             )}
           >
             <div
-              className={clsx({
+              className={clsx(
+            "-translate-x-4",
+            {
                 hidden: isOpen,
               })}
             >
-              <ProwlerShort />
+              <CTOIconShort  width={100} />
             </div>
             <div
               className={clsx({
@@ -61,7 +63,7 @@ export function Sidebar() {
                 "!mt-0": isOpen,
               })}
             >
-              <ProwlerExtended />
+              <CTOIconExtended width={240} />
             </div>
           </Link>
         </Button>
