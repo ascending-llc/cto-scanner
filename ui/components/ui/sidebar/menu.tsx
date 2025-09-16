@@ -1,12 +1,11 @@
 "use client";
 
-import { Divider } from "@nextui-org/react";
 import { Ellipsis, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { logOut } from "@/actions/auth";
-import { AddIcon, InfoIcon } from "@/components/icons";
+import { AddIcon } from "@/components/icons";
 import { CollapseMenuButton } from "@/components/ui/sidebar/collapse-menu-button";
 import {
   Tooltip,
@@ -170,11 +169,11 @@ export const Menu = ({ isOpen }: { isOpen: boolean }) => {
 
       <div className="text-muted-foreground border-border mt-2 flex items-center justify-center gap-2 border-t pt-2 text-center text-xs">
         <span>{process.env.NEXT_PUBLIC_PROWLER_RELEASE_VERSION}</span>
-        {process.env.NEXT_PUBLIC_IS_CLOUD_ENV === "true" && (
+        {/*process.env.NEXT_PUBLIC_IS_CLOUD_ENV === "true" && (
           <>
             <Divider orientation="vertical" />
             <Link
-              href="https://comp.ascendingdc.com/api/v1/docs"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1"
@@ -185,7 +184,7 @@ export const Menu = ({ isOpen }: { isOpen: boolean }) => {
               </span>
             </Link>
           </>
-        )}
+        )*/}
       </div>
     </>
   );
