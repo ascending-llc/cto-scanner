@@ -115,29 +115,44 @@ env:
     - NEXT_PUBLIC_IS_CLOUD_ENV
 
 postgresql:
+  enabled: true
+  
+  image:
+    repository: postgres
+    tag: 17-alpine
+    pullPolicy: IfNotPresent
+  
   auth:
+    # Keep your existing secret
     existingSecret: prowler-api-env
-  primary:
-    persistence:
-      enabled: true
-      storageClass: ebs-sc-prowler
-      size: 50Gi
-
-    resources:
-      requests:
-        memory: "2Gi"
-        cpu: "150m"
-      limits:
-        memory: "2Gi"
-        cpu: "150m"
-
-  # Memory-optimized settings
-  postgresqlConfiguration:
-    shared_buffers: "512MB"
-    effective_cache_size: "1536MB"
-    work_mem: "4MB"
-    maintenance_work_mem: "64MB"
-    max_connections: "100"
+    secretKeys:
+      adminPasswordKey: POSTGRES_ADMIN_PASSWORD
+      adminUsernameKey: POSTGRES_ADMIN_USER
+      usernameKey: POSTGRES_USER
+      databaseKey: POSTGRES_DB
+      portKey: POSTGRES_PORT
+  
+  persistence:
+    enabled: true
+    storageClass: ebs-sc-prowler
+    size: 50Gi
+    accessMode: ReadWriteOnce
+  
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "150m"
+    limits:
+      memory: "2Gi"
+      cpu: "150m"
+  
+  # Memory-optimized settings (renamed from postgresqlConfiguration)
+  config: |
+    shared_buffers = 512MB
+    effective_cache_size = 1536MB
+    work_mem = 4MB
+    maintenance_work_mem = 64MB
+    max_connections = 100
 
 # Valkey configuration
 valkey:
