@@ -28,4 +28,3 @@ dependencies:
     version: "0.15.0"  # Check for the latest version
     repository: "https://charts.external-secrets.io"
     condition: external-secrets.install
-
