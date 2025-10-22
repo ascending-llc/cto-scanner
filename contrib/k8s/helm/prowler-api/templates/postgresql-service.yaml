@@ -1,0 +1,18 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowler-postgresql
+  labels:
+    {{- include "prowler-api.labels" . | nindent 4 }}
+    app.kubernetes.io/component: database
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-postgresql
+      port: {{ include "prowler-api.postgresql.port" . | int }}
+      targetPort: postgresql
+  selector:
+    {{- include "prowler-api.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: database
+{{- end }}

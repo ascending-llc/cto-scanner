@@ -60,3 +60,15 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Get PostgreSQL port from secret
+*/}}
+{{- define "prowler-api.postgresql.port" -}}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace .Values.postgresql.auth.existingSecret) -}}
+{{- if $secret -}}
+{{- $secret.data.POSTGRES_PORT | b64dec -}}
+{{- else -}}
+5432
+{{- end -}}
+{{- end -}}
